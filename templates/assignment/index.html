@@ -21,9 +21,9 @@
                 <td>{{ task.content }}</td>
                 <td>{{ task.date_created.date() }}</td>
                 <td>
-                    <a href="{{ url_for('delete', id=task.id) }}">Delete</a>
+                    <a href="/delete/{{task.id}}">Delete</a>
                     <br>
-                    <a href="/assignment/update/{{task.id}}">Update</a>
+                    <a href="/update/{{task.id}}">Update</a>
                 </td>
             </tr>
         {% endfor %}
@@ -32,12 +32,9 @@
 
     <div class="form">
         <form action="/" method="POST">
-            <input type="text" name="content" id="content" placeholder="Enter your task">
+            <input type="text" name="content" id="content">
             <input type="submit" value="Add Task">
         </form>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="/" style="text-decoration: none; font-weight: bold;">Go Back to Homepage</a>
     </div>
 </div>
 {% endblock %}
