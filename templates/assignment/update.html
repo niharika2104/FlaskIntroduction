@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'assignment/base.html' %}
 
 {% block head %}
 <title>Task Master</title>
@@ -9,10 +9,13 @@
     <h1 style="text-align: center">Update Task</h1>
 
     <div class="form">
-        <form action="/update/{{task.id}}" method="POST">
+        <form action="/assignment/update/{{task.id}}" method="POST">
             <input type="text" name="content" id="content" value="{{task.content}}">
             <input type="submit" value="Update">
         </form>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/" style="text-decoration: none; font-weight: bold;">Go Back to Homepage</a>
     </div>
 </div>
 {% endblock %}

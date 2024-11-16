@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Head block for page-specific content -->
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <!-- Optional Header or Navigation -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/assignment/">Task Master</a></li>
+                <li><a href="#">Final Project (Coming Soon)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Body block for page-specific content -->
+    {% block body %}{% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <p style="text-align: center; margin-top: 20px;">&copy; 2024 Your Name or Project Name</p>
+    </footer>
+</body>
+</html>
