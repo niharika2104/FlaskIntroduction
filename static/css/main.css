@@ -52,6 +52,12 @@ a {
     border-radius: 5px;
 }
 
+/* Styling for actions to separate Delete and Update links */
+td a {
+    display: block; /* Forces links to appear on separate lines */
+    margin: 5px 0; /* Adds space between the links */
+}
+
 a:hover {
     background-color: #666; /* Darker hover effect */
 }
