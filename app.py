@@ -14,9 +14,15 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r>' % self.id
 
+with app.app_context():
+    db.create_all()
+
 # Landing Page Route
 @app.route('/')
 def landing_page():
+    if request.method == 'POST':
+        # Handle POST request logic here
+        pass
     return render_template('landing.html')
 
 @app.route('/assignment/', methods=['POST', 'GET'])
