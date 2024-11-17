@@ -20,6 +20,7 @@ table, td, th {
 table {
     border-collapse: collapse;
     width: 100%;
+    height: 100px;
     background-color: #fff; /* White table background for better readability */
     color: #000; /* Black text for better contrast in the table */
 }
