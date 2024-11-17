@@ -25,7 +25,7 @@ table {
 }
 
 th {
-    height: 30px;
+    height: 100px;
     background-color: #333; /* Dark header for emphasis */
     color: #fff; /* White text in headers */
 }
