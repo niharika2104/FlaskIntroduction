@@ -48,8 +48,7 @@ td {
 /* Link Styling */
 a {
     text-decoration: none;
-    color: #fff; /* White text for links */
-    background-color: #444; /* Button-like appearance */
+    color: black;
     padding: 5px 10px;
     border-radius: 5px;
 }
