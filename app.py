@@ -117,7 +117,6 @@ def delete_project(id):
     except:
         return 'There was a problem deleting that project'
 
-
 @app.route('/assignment/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
