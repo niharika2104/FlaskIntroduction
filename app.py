@@ -13,6 +13,19 @@ class Todo(db.Model):
 
     def __repr__(self):
         return '<Task %r>' % self.id
+    
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    task = db.Column(db.String(200), nullable=False)
+    category = db.Column(db.String(50), nullable=False)
+    priority = db.Column(db.Integer, nullable=False)
+    due_date = db.Column(db.Date, nullable=False)
+    file_path = db.Column(db.String(200), nullable=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Project {self.title}>'
 
 with app.app_context():
     db.create_all()
@@ -30,23 +43,80 @@ def landing_page():
  #   if request.method == 'POST':
   #      pass
    # return render_template('projects/index.html', projects=projects)
-
-@app.route('/projects/', methods=['POST', 'GET'])
+@app.route('/projects/', methods=['GET'])
 def projects():
-    if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
+    projects = Project.query.order_by(Project.date_created).all()
+    return render_template('projects/index.html', projects=projects)
 
+@app.route('/new_project/', methods=['POST', 'GET'])
+def new_project():
+    if request.method == 'POST':
+        title = request.form['title']
+        task = request.form['task']
+        category = request.form['category']
+        priority = int(request.form['priority'])
+        due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
+        file = request.files['file']
+        
+        file_path = None
+        if file:
+            file_path = f'static/uploads/{file.filename}'
+            file.save(file_path)
+        
+        new_project = Project(
+            title=title,
+            task=task,
+            category=category,
+            priority=priority,
+            due_date=due_date,
+            file_path=file_path
+        )
+        
         try:
-            db.session.add(new_task)
+            db.session.add(new_project)
             db.session.commit()
             return redirect('/projects/')
         except:
-            return 'There was an issue adding your task'
+            return 'There was an issue adding your project'
 
-    else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('projects/index.html', tasks=tasks)
+    return render_template('projects/new.html')
+
+# Edit Project
+@app.route('/edit_project/<int:id>/', methods=['POST', 'GET'])
+def edit_project(id):
+    project = Project.query.get_or_404(id)
+    if request.method == 'POST':
+        project.title = request.form['title']
+        project.task = request.form['task']
+        project.category = request.form['category']
+        project.priority = int(request.form['priority'])
+        project.due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
+        
+        file = request.files['file']
+        if file:
+            file_path = f'static/uploads/{file.filename}'
+            file.save(file_path)
+            project.file_path = file_path
+        
+        try:
+            db.session.commit()
+            return redirect('/projects/')
+        except:
+            return 'There was an issue updating your project'
+
+    return render_template('projects/edit.html', project=project)
+
+# Delete Project
+@app.route('/delete_project/<int:id>/')
+def delete_project(id):
+    project_to_delete = Project.query.get_or_404(id)
+    try:
+        db.session.delete(project_to_delete)
+        db.session.commit()
+        return redirect('/projects/')
+    except:
+        return 'There was a problem deleting that project'
+
 
 @app.route('/assignment/', methods=['POST', 'GET'])
 def index():
