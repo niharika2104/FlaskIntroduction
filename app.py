@@ -32,7 +32,7 @@ def landing_page():
    # return render_template('projects/index.html', projects=projects)
 
 @app.route('/projects/', methods=['POST', 'GET'])
-def index():
+def projects():
     if request.method == 'POST':
         task_content = request.form['content']
         new_task = Todo(content=task_content)
