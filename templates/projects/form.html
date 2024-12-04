@@ -3,36 +3,30 @@
 {% block title %}Add New Project{% endblock %}
 
 {% block body %}
-<div class="new-project-page">
-    <h1>Add New Project</h1>
+<h1>Add a New Project</h1>
+<form action="/projects/new" method="POST" enctype="multipart/form-data">
+    <label for="title">Project Title:</label>
+    <input type="text" id="title" name="title" required>
 
-    <form action="/new_project/" method="POST" enctype="multipart/form-data" class="form">
-        <!-- Task Name -->
-        <label for="title">Task:</label>
-        <input type="text" id="title" name="task" placeholder="Enter task name" required>
+    <label for="task">Task Description:</label>
+    <input type="text" id="task" name="task" required>
 
-        <!-- Category -->
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-            <option value="Fun">Fun</option>
-            <option value="Work">Work</option>
-            <option value="Health">Health</option>
-        </select>
+    <label for="category">Category:</label>
+    <select id="category" name="category" required>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="Other">Other</option>
+    </select>
 
-        <!-- Priority -->
-        <label for="priority">Priority (1-5):</label>
-        <input type="number" id="priority" name="priority" min="1" max="5" required>
+    <label for="priority">Priority (1-5):</label>
+    <input type="number" id="priority" name="priority" min="1" max="5" required>
 
-        <!-- Due Date -->
-        <label for="due_date">Due Date:</label>
-        <input type="date" id="due_date" name="due_date" required>
+    <label for="due_date">Due Date:</label>
+    <input type="date" id="due_date" name="due_date" required>
 
-        <!-- File Upload -->
-        <label for="file">Upload File (optional):</label>
-        <input type="file" id="file" name="file">
+    <label for="file">Upload File:</label>
+    <input type="file" id="file" name="file">
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Add Project</button>
-    </form>
-</div>
+    <button type="submit">Submit</button>
+</form>
 {% endblock %}
