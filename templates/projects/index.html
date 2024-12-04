@@ -6,59 +6,45 @@
 <div class="projects-page">
     <h1>Project List</h1>
 
-    <!-- Form for Adding a New Project -->
-    <form action="/new_project/" method="POST" enctype="multipart/form-data" class="form">
-        <label for="title">Project Task:</label>
-        <input type="text" id="title" name="title" placeholder="Enter project task" required>
-        
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-            <option value="Work">Work</option>
-            <option value="Fun">Fun</option>
-            <option value="Personal">Personal</option>
-        </select>
-        
-        <label for="priority">Priority (1-5):</label>
-        <input type="number" id="priority" name="priority" min="1" max="5" required>
-        
-        <label for="due_date">Due Date:</label>
-        <input type="date" id="due_date" name="due_date" required>
-        
-        <label for="file">Upload Document:</label>
-        <input type="file" id="file" name="file">
-        
-        <button type="submit" class="btn">Add Project</button>
-    </form>
+    <!-- Add New Project Button -->
+    <a href="/new_project/" class="btn btn-primary">Add New Project</a>
 
-    <!-- List of Existing Projects -->
-    <h2>Existing Projects</h2>
+    <!-- Sorting Options -->
+    <div class="sorting-options">
+        <p>Sort by:</p>
+        <a href="/projects/?sort_by=priority" class="btn btn-secondary">Priority</a>
+        <a href="/projects/?sort_by=category" class="btn btn-secondary">Category</a>
+        <a href="/projects/?sort_by=due_date" class="btn btn-secondary">Due Date</a>
+    </div>
+
+    <!-- Project Table -->
     <table class="project-table">
         <thead>
             <tr>
-                <th>Priority</th>
+                <th>Task</th>
                 <th>Category</th>
+                <th>Priority</th>
                 <th>Due Date</th>
-                <th>Content</th>
-                <th>Document</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for project in projects %}
             <tr>
-                <td>{{ project.priority }}</td>
+                <td>{{ project.task }}</td>
                 <td>{{ project.category }}</td>
+                <td>{{ project.priority }}</td>
                 <td>{{ project.due_date }}</td>
-                <td>{{ project.title }}</td>
                 <td>
                     {% if project.file_path %}
-                    <a href="/static/{{ project.file_path.split('static/')[1] }}" target="_blank">
-                        <img src="/static/{{ project.file_path.split('static/')[1] }}" alt="Document" class="document-preview">
+                    <a href="/{{ project.file_path }}" target="_blank">
+                        <img src="/{{ project.file_path }}" alt="Project Image" width="50">
                     </a>
                     {% endif %}
                 </td>
                 <td>
-                    <a href="/edit_project/{{ project.id }}/" class="btn btn-warning">Update</a>
+                    <a href="/edit_project/{{ project.id }}/" class="btn btn-warning">Edit</a>
                     <a href="/delete_project/{{ project.id }}/" class="btn btn-danger">Delete</a>
                 </td>
             </tr>

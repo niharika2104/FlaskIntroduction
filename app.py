@@ -1,10 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
 db = SQLAlchemy(app)
+
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +21,6 @@ class Todo(db.Model):
     
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
     task = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
@@ -45,77 +49,87 @@ def landing_page():
    # return render_template('projects/index.html', projects=projects)
 @app.route('/projects/', methods=['GET'])
 def projects():
-    projects = Project.query.order_by(Project.date_created).all()
+    """
+    Displays all projects with optional sorting.
+    """
+    sort_by = request.args.get('sort_by', 'date_created')  # Default sorting by creation date
+    if sort_by == 'priority':
+        projects = Project.query.order_by(Project.priority).all()
+    elif sort_by == 'category':
+        projects = Project.query.order_by(Project.category).all()
+    elif sort_by == 'due_date':
+        projects = Project.query.order_by(Project.due_date).all()
+    else:
+        projects = Project.query.order_by(Project.date_created).all()
     return render_template('projects/index.html', projects=projects)
 
-@app.route('/new_project/', methods=['POST', 'GET'])
+@app.route('/new_project/', methods=['GET', 'POST'])
 def new_project():
+    """
+    Route to add a new project.
+    """
     if request.method == 'POST':
-        title = request.form['title']
         task = request.form['task']
         category = request.form['category']
         priority = int(request.form['priority'])
         due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
         file = request.files['file']
-        
+
         file_path = None
         if file:
-            file_path = f'static/uploads/{file.filename}'
+            filename = file.filename
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
-        
-        new_project = Project(
-            title=title,
-            task=task,
-            category=category,
-            priority=priority,
-            due_date=due_date,
-            file_path=file_path
-        )
-        
+
+        new_project = Project(task=task, category=category, priority=priority, due_date=due_date, file_path=file_path)
         try:
             db.session.add(new_project)
             db.session.commit()
             return redirect('/projects/')
         except:
-            return 'There was an issue adding your project'
+            return 'There was an issue adding your project.'
 
     return render_template('projects/new.html')
 
-# Edit Project
-@app.route('/edit_project/<int:id>/', methods=['POST', 'GET'])
+@app.route('/edit_project/<int:id>/', methods=['GET', 'POST'])
 def edit_project(id):
+    """
+    Route to edit an existing project.
+    """
     project = Project.query.get_or_404(id)
     if request.method == 'POST':
-        project.title = request.form['title']
         project.task = request.form['task']
         project.category = request.form['category']
         project.priority = int(request.form['priority'])
         project.due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
-        
+
         file = request.files['file']
-        if file:
-            file_path = f'static/uploads/{file.filename}'
+        if file and file.filename != '':
+            filename = file.filename
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             project.file_path = file_path
-        
+
         try:
             db.session.commit()
             return redirect('/projects/')
         except:
-            return 'There was an issue updating your project'
+            return 'There was an issue updating your project.'
 
     return render_template('projects/edit.html', project=project)
 
-# Delete Project
 @app.route('/delete_project/<int:id>/')
 def delete_project(id):
+    """
+    Route to delete a project.
+    """
     project_to_delete = Project.query.get_or_404(id)
     try:
         db.session.delete(project_to_delete)
         db.session.commit()
         return redirect('/projects/')
     except:
-        return 'There was a problem deleting that project'
+        return 'There was an issue deleting your project.'
 
 @app.route('/assignment/', methods=['POST', 'GET'])
 def index():

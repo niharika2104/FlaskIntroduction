@@ -1,24 +1,42 @@
 {% extends 'base.html' %}
 
-{% block head %}
-<title>Project List</title>
-{% endblock %}
+{% block title %}Edit Project{% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Update project</h1>
+<div class="edit-project-page">
+    <h1>Edit Project</h1>
 
-    <div class="form">
-        <form action="/projects/edit/{{task.id}}" method="POST">
-            <input type="text" name="content" id="content" value="{{task.content}}">
-            <input type="submit" value="Update">
-        </form>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="/projects/" style="text-decoration: none; font-weight: bold;">Go Back to Task Master</a>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="/" style="text-decoration: none; font-weight: bold;">Go Back to Home Page</a>
-    </div>
+    <form action="/edit_project/{{ project.id }}/" method="POST" enctype="multipart/form-data" class="form">
+        <!-- Task Name -->
+        <label for="task">Task:</label>
+        <input type="text" id="task" name="task" value="{{ project.task }}" required>
+
+        <!-- Category -->
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="Fun" {% if project.category == 'Fun' %}selected{% endif %}>Fun</option>
+            <option value="Work" {% if project.category == 'Work' %}selected{% endif %}>Work</option>
+            <option value="Health" {% if project.category == 'Health' %}selected{% endif %}>Health</option>
+        </select>
+
+        <!-- Priority -->
+        <label for="priority">Priority (1-5):</label>
+        <input type="number" id="priority" name="priority" value="{{ project.priority }}" min="1" max="5" required>
+
+        <!-- Due Date -->
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" name="due_date" value="{{ project.due_date }}" required>
+
+        <!-- File Upload -->
+        <label for="file">Upload New File (optional):</label>
+        <input type="file" id="file" name="file">
+
+        {% if project.file_path %}
+        <p>Current File: <a href="/{{ project.file_path }}" target="_blank">View File</a></p>
+        {% endif %}
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update Project</button>
+    </form>
 </div>
 {% endblock %}

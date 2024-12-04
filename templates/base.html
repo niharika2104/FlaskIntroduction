@@ -9,6 +9,27 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% block body %}{% endblock %}
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('landing_page') }}">Home</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/assignment/">Task Master</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        {% block body %}
+        <!-- Main content will be inserted here by child templates -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Flask Application. All rights reserved.</p>
+    </footer>
 </body>
 </html>
