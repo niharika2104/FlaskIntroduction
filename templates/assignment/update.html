@@ -6,18 +6,13 @@
 
 {% block body %}
 <div class="assignments-update">
-    <h1 style="text-align: center">Update Task</h1>
-
-    <div class="form">
+    <div class="form-container">
+        <h1>Update Task</h1>
         <form action="/assignment/update/{{task.id}}" method="POST">
-            <input type="text" name="content" id="content" value="{{task.content}}">
+            <input type="text" name="content" value="{{task.content}}" required>
             <input type="submit" value="Update">
         </form>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
         <a href="/assignment/" style="text-decoration: none; font-weight: bold;">Go Back to Task Master</a>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
         <a href="/" style="text-decoration: none; font-weight: bold;">Go Back to Home Page</a>
     </div>
 </div>

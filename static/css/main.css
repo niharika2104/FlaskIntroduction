@@ -215,6 +215,73 @@ main {
     background-color: #666; /* Darker hover effect */
 }
 
+/* Update Task Page Styling */
+.assignments-update {
+    background-color: rgb(105, 112, 97); /* Same background as the assignment page */
+    color: #fff; /* White text for contrast */
+    height: 100vh; /* Full-page height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Form Container */
+.assignments-update .form-container {
+    background-color: #fff; /* White background for form container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visibility */
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Heading Styling */
+.assignments-update h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333; /* Darker heading for contrast */
+}
+
+/* Form Inputs */
+.assignments-update .form-container input[type="text"] {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Submit Button */
+.assignments-update .form-container input[type="submit"] {
+    background-color: #007acc; /* Blue button color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.assignments-update .form-container input[type="submit"]:hover {
+    background-color: #005f99; /* Darker blue on hover */
+}
+
+/* Back Link */
+.assignments-update .form-container a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007acc;
+    font-weight: bold;
+}
+
+.assignments-update .form-container a:hover {
+    text-decoration: underline;
+}
+
 /* Projects (projects/index.html) */
 .projects-page {
     background-color: #f9f9f9;
