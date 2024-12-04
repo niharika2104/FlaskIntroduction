@@ -67,84 +67,152 @@ main {
     color: #fff;
 }
 
-/* Assignments (assignment.html and assignment/index.html) */
-.assignments-page {
-    background-color: #f0e5d8; /* Light beige */
-    padding: 20px;
-    border-radius: 8px;
+/* Global Styling */
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f4f4f4; /* Default background for other pages */
+    color: #333;
+    box-sizing: border-box;
 }
 
-.assignments-page h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: #8a5a44;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
 }
 
-.assignments-page ul {
-    list-style: none;
-    padding: 0;
-}
-
-.assignments-page ul li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-.assignments-page ul li a {
-    margin-left: 10px;
-    color: #007acc;
+header nav a {
+    color: #fff;
+    margin: 0 10px;
     text-decoration: none;
 }
 
-.assignments-page ul li a:hover {
+header nav a:hover {
     text-decoration: underline;
 }
 
-/* Assignment Update Page (assignment/update.html) */
-.assignments-update {
-    background-color: #fff;
+main {
     padding: 20px;
-    border: 1px solid #ddd;
+}
+
+/* Assignment Page Specific Styling */
+.assignments-page {
+    background-color: rgb(105, 112, 97); /* Background color as per assignment */
+    color: #fff; /* White text for better contrast */
+    padding: 20px;
     border-radius: 8px;
-    max-width: 600px;
-    margin: 20px auto;
 }
 
-.assignments-update h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #007acc;
+/* Centered content container */
+.assignments-page .content {
+    margin: 0 auto;
+    width: 400px;
 }
 
-.assignments-update form label {
-    display: block;
-    margin-bottom: 5px;
+/* Table Styling */
+.assignments-page table,
+.assignments-page td,
+.assignments-page th {
+    border: 1px solid #aaa;
+}
+
+.assignments-page table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff; /* White table background for better readability */
+    color: #000; /* Black text for better contrast in the table */
+}
+
+.assignments-page th {
+    height: 100px;
+    color: #090808; /* Dark text for headers */
+    text-align: center;
     font-weight: bold;
 }
 
-.assignments-update form input,
-.assignments-update form button {
-    width: 100%;
+.assignments-page td {
+    text-align: center;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
 }
 
-.assignments-update form button {
-    background-color: #007acc;
+/* Form Styling */
+.assignments-page .form {
+    margin-top: 20px;
+}
+
+.assignments-page #content {
+    width: 70%;
+    padding: 5px;
+}
+
+.assignments-page {
+    background-color: rgb(105, 112, 97); /* Assignment-specific background */
+    color: #fff; /* White text for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.assignments-page .title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.assignments-page .tasks-section {
+    margin-bottom: 20px;
+}
+
+.assignments-page .tasks-table table,
+.assignments-page .tasks-table th,
+.assignments-page .tasks-table td {
+    border: 1px solid #aaa;
+}
+
+.assignments-page .tasks-table table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff; /* White table background for better readability */
+    color: #000; /* Black text for better contrast in the table */
+}
+
+.assignments-page .tasks-table th {
+    height: 100px;
+    color: #090808; /* Dark text for headers */
+    text-align: center;
+    font-weight: bold;
+}
+
+.assignments-page .tasks-table td {
+    text-align: center;
+    padding: 10px;
+}
+
+.assignments-page .form-section .form {
+    margin-top: 20px;
+}
+
+.assignments-page .form-section #content {
+    width: 70%;
+    padding: 5px;
+}
+
+.assignments-page .back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.assignments-page .back-link a {
+    text-decoration: none;
+    font-weight: bold;
     color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    padding: 5px 10px;
+    background-color: #007acc; /* Blue background */
+    border-radius: 5px;
 }
 
-.assignments-update form button:hover {
-    background-color: #005f99;
+.assignments-page .back-link a:hover {
+    background-color: #666; /* Darker hover effect */
 }
 
 /* Projects (projects/index.html) */
