@@ -6,6 +6,42 @@ body, html {
     color: #fff; /* White text for better contrast */
 }
 
+/* Landing Page Styles */
+.landing-page {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #eaf7ff; /* Light blue */
+}
+
+.landing-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #007acc;
+}
+
+.landing-page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.landing-page ul li {
+    margin: 15px 0;
+}
+
+.landing-page ul li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #007acc;
+    border: 2px solid #007acc;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.landing-page ul li a:hover {
+    background-color: #007acc;
+    color: #fff;
+}
+
 /* Centered content container */
 .content {
     margin: 0 auto;
