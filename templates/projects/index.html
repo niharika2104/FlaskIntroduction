@@ -26,7 +26,8 @@
                 <td>{{ project.due_date }}</td>
                 <td>
                     {% if project.file_path %}
-                        <button onclick="openModal('/static/uploads/document.pdf')">View Document</button>
+                        <!-- Display View Document button with file path -->
+                        <button onclick="openModal('{{ url_for('static', filename=project.file_path) }}')">View Document</button>
                     {% else %}
                         No Document
                     {% endif %}
@@ -41,10 +42,27 @@
     </table>
 </div>
 <!-- Modal for Document -->
-<div id="documentModal" class="modal">
+<div id="documentModal" class="modal"></div>
     <div class="modal-content">
         <span class="close-button" onclick="closeModal()">&times;</span>
         <iframe id="documentFrame" src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
     </div>
 </div>
+
+<!-- JavaScript for Modal -->
+<script>
+    function openModal(documentUrl) {
+        // Set the iframe source to the document URL
+        document.getElementById('documentFrame').src = documentUrl;
+        // Display the modal
+        document.getElementById('documentModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        // Hide the modal
+        document.getElementById('documentModal').style.display = 'none';
+        // Clear the iframe source
+        document.getElementById('documentFrame').src = '';
+    }
+</script>
 {% endblock %}
