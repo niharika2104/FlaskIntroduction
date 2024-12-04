@@ -1,0 +1,191 @@
+/* Global Styles (base.html) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Landing Page (landing.html) */
+.landing-page {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #eaf7ff; /* Light blue */
+    border-radius: 8px;
+}
+
+.landing-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #007acc;
+}
+
+.landing-page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.landing-page ul li {
+    margin: 15px 0;
+}
+
+.landing-page ul li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #007acc;
+    border: 2px solid #007acc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.landing-page ul li a:hover {
+    background-color: #007acc;
+    color: #fff;
+}
+
+/* Assignments (assignment.html and assignment/index.html) */
+.assignments-page {
+    background-color: #f0e5d8; /* Light beige */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.assignments-page h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #8a5a44;
+}
+
+.assignments-page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.assignments-page ul li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.assignments-page ul li a {
+    margin-left: 10px;
+    color: #007acc;
+    text-decoration: none;
+}
+
+.assignments-page ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Assignment Update Page (assignment/update.html) */
+.assignments-update {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.assignments-update h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #007acc;
+}
+
+.assignments-update form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.assignments-update form input,
+.assignments-update form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.assignments-update form button {
+    background-color: #007acc;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.assignments-update form button:hover {
+    background-color: #005f99;
+}
+
+/* Projects (projects/index.html) */
+.projects-page {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.projects-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.projects-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.projects-page table th,
+.projects-page table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.projects-page table th {
+    background-color: #007acc;
+    color: #fff;
+}
+
+.projects-page table td a {
+    text-decoration: none;
+    color: #007acc;
+    font-weight: bold;
+}
+
+.projects-page table td a:hover {
+    text-decoration: underline;
+}
+
+/* Projects Form and Edit Page (projects/form.html
