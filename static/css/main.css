@@ -69,10 +69,14 @@ main {
 
 /* Assignment Page Specific Styling */
 .assignments-page {
-    background-color: rgb(105, 112, 97); /* Background color as per assignment */
-    color: #fff; /* White text for better contrast */
+    background-color: rgb(105, 112, 97); /* Full-page background */
+    color: #fff; /* White text for contrast */
+    min-height: 100vh; /* Ensure background color covers the entire viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     padding: 20px;
-    border-radius: 8px;
 }
 
 /* Centered content container */
