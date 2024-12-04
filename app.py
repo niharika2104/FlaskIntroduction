@@ -21,7 +21,7 @@ class Todo(db.Model):
     
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    task = db.Column(db.String(200), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
@@ -71,7 +71,7 @@ def new_project():
     if request.method == 'POST':
         try:
             # Collect form data
-            task = request.form['task']
+            title = request.form['task']
             category = request.form['category']
             priority = int(request.form['priority'])
             due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
@@ -86,7 +86,7 @@ def new_project():
 
             # Create new project
             new_project = Project(
-                task=task,
+                title=title,
                 category=category,
                 priority=priority,
                 due_date=due_date,
@@ -110,7 +110,7 @@ def edit_project(id):
     """
     project = Project.query.get_or_404(id)
     if request.method == 'POST':
-        project.task = request.form['task']
+        project.title = request.form['task']
         project.category = request.form['category']
         project.priority = int(request.form['priority'])
         project.due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
