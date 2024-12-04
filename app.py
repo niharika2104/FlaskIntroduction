@@ -69,26 +69,38 @@ def new_project():
     Route to add a new project.
     """
     if request.method == 'POST':
-        task = request.form['task']
-        category = request.form['category']
-        priority = int(request.form['priority'])
-        due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
-        file = request.files['file']
-
-        file_path = None
-        if file:
-            filename = file.filename
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-
-        new_project = Project(task=task, category=category, priority=priority, due_date=due_date, file_path=file_path)
         try:
+            # Collect form data
+            task = request.form['task']
+            category = request.form['category']
+            priority = int(request.form['priority'])
+            due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d').date()
+            file = request.files['file']
+
+            # Handle file upload
+            file_path = None
+            if file and file.filename != '':
+                filename = file.filename
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(file_path)
+
+            # Create new project
+            new_project = Project(
+                task=task,
+                category=category,
+                priority=priority,
+                due_date=due_date,
+                file_path=file_path
+            )
+
+            # Commit to database
             db.session.add(new_project)
             db.session.commit()
             return redirect('/projects/')
-        except:
+        except Exception as e:
+            # Print error to console for debugging
+            print(f"Error adding project: {e}")
             return 'There was an issue adding your project.'
-
     return render_template('projects/new.html')
 
 @app.route('/edit_project/<int:id>/', methods=['GET', 'POST'])
