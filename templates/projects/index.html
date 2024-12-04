@@ -3,31 +3,33 @@
 {% block title %}Projects{% endblock %}
 
 {% block body %}
-<h1>Projects</h1>
-<a href="/projects/new">Add New Project</a>
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Priority</th>
-            <th>Due Date</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for project in projects %}
-        <tr>
-            <td>{{ project.title }}</td>
-            <td>{{ project.category }}</td>
-            <td>{{ project.priority }}</td>
-            <td>{{ project.due_date }}</td>
-            <td>
-                <a href="/projects/edit/{{ project.id }}">Edit</a>
-                <a href="/projects/delete/{{ project.id }}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="projects-page">
+    <h1>Projects</h1>
+    <a href="/projects/new">Add New Project</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.title }}</td>
+                <td>{{ project.category }}</td>
+                <td>{{ project.priority }}</td>
+                <td>{{ project.due_date }}</td>
+                <td>
+                    <a href="/projects/edit/{{ project.id }}">Edit</a>
+                    <a href="/projects/delete/{{ project.id }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
