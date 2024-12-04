@@ -67,36 +67,6 @@ main {
     color: #fff;
 }
 
-/* Global Styling */
-body, html {
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #f4f4f4; /* Default background for other pages */
-    color: #333;
-    box-sizing: border-box;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-}
-
-header nav a {
-    color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-header nav a:hover {
-    text-decoration: underline;
-}
-
-main {
-    padding: 20px;
-}
-
 /* Assignment Page Specific Styling */
 .assignments-page {
     background-color: rgb(105, 112, 97); /* Background color as per assignment */
@@ -120,7 +90,7 @@ main {
 
 .assignments-page table {
     border-collapse: collapse;
-    width: 100%;
+    width: 40%;
     background-color: #fff; /* White table background for better readability */
     color: #000; /* Black text for better contrast in the table */
 }
