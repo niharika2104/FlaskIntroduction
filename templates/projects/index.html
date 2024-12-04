@@ -9,10 +9,11 @@
     <table>
         <thead>
             <tr>
-                <th>Title</th>
+                <th>Content</th>
                 <th>Category</th>
                 <th>Priority</th>
                 <th>Due Date</th>
+                <th>Document</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,6 +25,13 @@
                 <td>{{ project.priority }}</td>
                 <td>{{ project.due_date }}</td>
                 <td>
+                    {% if project.file_path %}
+                        <button onclick="openModal('/static/uploads/document.pdf')">View Document</button>
+                    {% else %}
+                        No Document
+                    {% endif %}
+                </td>
+                <td>
                     <a href="/projects/edit/{{ project.id }}">Edit</a>
                     <a href="/projects/delete/{{ project.id }}">Delete</a>
                 </td>
@@ -31,5 +39,12 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+<!-- Modal for Document -->
+<div id="documentModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <iframe id="documentFrame" src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+    </div>
 </div>
 {% endblock %}
