@@ -3,18 +3,18 @@
 {% block title %}Project List{% endblock %}
 
 {% block body %}
-<div class="projects-page">
-    <h1>Project List</h1>
+<div class="projects-container">
+    <h1 class="page-title">Project List</h1>
 
     <!-- Add New Project Button -->
-    <a href="/new_project/" class="btn btn-primary">Add New Project</a>
+    <a href="/new_project/" class="btn btn-add">Add New Project</a>
 
     <!-- Sorting Options -->
     <div class="sorting-options">
         <p>Sort by:</p>
-        <a href="/projects/?sort_by=priority" class="btn btn-secondary">Priority</a>
-        <a href="/projects/?sort_by=category" class="btn btn-secondary">Category</a>
-        <a href="/projects/?sort_by=due_date" class="btn btn-secondary">Due Date</a>
+        <a href="/projects/?sort_by=priority" class="btn btn-sort">Priority</a>
+        <a href="/projects/?sort_by=category" class="btn btn-sort">Category</a>
+        <a href="/projects/?sort_by=due_date" class="btn btn-sort">Due Date</a>
     </div>
 
     <!-- Project Table -->
@@ -32,20 +32,22 @@
         <tbody>
             {% for project in projects %}
             <tr>
-                <td>{{ project.task }}</td>
+                <td>{{ project.title }}</td>
                 <td>{{ project.category }}</td>
                 <td>{{ project.priority }}</td>
                 <td>{{ project.due_date }}</td>
                 <td>
                     {% if project.file_path %}
                     <a href="/{{ project.file_path }}" target="_blank">
-                        <img src="/{{ project.file_path }}" alt="Project Image" width="50">
+                        <img src="/{{ project.file_path }}" alt="Project Image" class="thumbnail">
                     </a>
+                    {% else %}
+                    <p>No Image</p>
                     {% endif %}
                 </td>
                 <td>
-                    <a href="/edit_project/{{ project.id }}/" class="btn btn-warning">Edit</a>
-                    <a href="/delete_project/{{ project.id }}/" class="btn btn-danger">Delete</a>
+                    <a href="/edit_project/{{ project.id }}/" class="btn btn-edit">Edit</a>
+                    <a href="/delete_project/{{ project.id }}/" class="btn btn-delete">Delete</a>
                 </td>
             </tr>
             {% endfor %}
