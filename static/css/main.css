@@ -33,6 +33,7 @@ main {
 .landing-page {
     text-align: center;
     padding: 50px 20px;
+    min-height: 100vh;
     background-color: #eaf7ff; /* Light blue */
     border-radius: 8px;
 }
@@ -50,6 +51,7 @@ main {
 
 .landing-page ul li {
     margin: 15px 0;
+    margin-bottom: 15px;
 }
 
 .landing-page ul li a {
