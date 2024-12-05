@@ -27,8 +27,8 @@
                 <td>
                     {% if project.file_path %}
                         <!-- Display the document as an image or a clickable preview -->
-                        <a href="/static/{{ project.file_path }}" target="_blank">
-                            <img src="/static/{{ project.file_path }}" alt="Document" style="width: 50px; height: auto; border-radius: 5px;">
+                        <a href="{{ project.file_path.lstrip('static/') }}" target="_blank">
+                            <img src="/{{ project.file_path.lstrip('static/') }}" alt="Document" style="width: 50px; height: auto; border-radius: 5px;">
                         </a>
                     {% else %}
                         No Document
