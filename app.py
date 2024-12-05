@@ -136,6 +136,11 @@ def delete_project(id):
         return redirect('/projects/')
     except:
         return "Error deleting project"
+    
+@app.route('/projects/details/<int:id>', methods=['GET'])
+def project_details(id):
+    project = Project.query.get_or_404(id)  # Get the project or return 404 if not found
+    return render_template('projects/details.html', project=project)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Project Details{% endblock %}
+
+{% block body %}
+<div class="project-details">
+    <h1>Project Details</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <td>{{ project.title }}</td>
+        </tr>
+        <tr>
+            <th>Task</th>
+            <td>{{ project.task }}</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ project.category }}</td>
+        </tr>
+        <tr>
+            <th>Priority</th>
+            <td>{{ project.priority }}</td>
+        </tr>
+        <tr>
+            <th>Due Date</th>
+            <td>{{ project.due_date }}</td>
+        </tr>
+        <tr>
+            <th>Document</th>
+            <td>
+                {% if project.file_path %}
+                    <a href="/static/{{ project.file_path }}" target="_blank">View Document</a>
+                {% else %}
+                    No Document
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <a href="/projects/">Back to Projects</a>
+</div>
+{% endblock %}
