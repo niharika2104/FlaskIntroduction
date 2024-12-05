@@ -25,12 +25,7 @@
                 <td>{{ project.priority }}</td>
                 <td>{{ project.due_date }}</td>
                 <td>
-                    {% if project.file_path %}
-                        <!-- Display View Document button with file path -->
-                        <button onclick="/static/{{ project.file_path }}">View Document</button>
-                    {% else %}
-                        No Document
-                    {% endif %}
+                    <a href="/static/{{ project.file_path }}" target="_blank">View Document</a>
                 </td>
                 <td>
                     <a href="/projects/edit/{{ project.id }}">Edit</a>
