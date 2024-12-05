@@ -27,7 +27,7 @@
                 <td>
                     {% if project.file_path %}
                         <!-- Display View Document button with file path -->
-                        <button onclick="openModal('{{ url_for('static', filename=project.file_path) }}')">View Document</button>
+                        <button onclick="openModal('{{ project.file_path }}')">View Document</button>
                     {% else %}
                         No Document
                     {% endif %}
