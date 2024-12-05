@@ -25,7 +25,14 @@
                 <td>{{ project.priority }}</td>
                 <td>{{ project.due_date }}</td>
                 <td>
-                    <a href="/static/{{ project.file_path }}" target="_blank">View Document</a>
+                    {% if project.file_path %}
+                        <!-- Display the document as an image or a clickable preview -->
+                        <a href="/static/{{ project.file_path }}" target="_blank">
+                            <img src="/static/{{ project.file_path }}" alt="Document" style="width: 50px; height: auto; border-radius: 5px;">
+                        </a>
+                    {% else %}
+                        No Document
+                    {% endif %}
                 </td>
                 <td>
                     <a href="/projects/edit/{{ project.id }}">Edit</a>
