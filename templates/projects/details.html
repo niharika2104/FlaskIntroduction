@@ -30,15 +30,12 @@
             <th>Document</th>
             <td>
                 {% if project.file_path %}
-                    {% if project.file_path.endswith('.png') or project.file_path.endswith('.jpg') or project.file_path.endswith('.jpeg') or project.file_path.endswith('.gif') %}
-                        <!-- Display image directly -->
-                        <img src="/static/{{ project.file_path }}" alt="Document" style="width: 100px; height: auto; border-radius: 5px;">
-                    {% elif project.file_path.endswith('.pdf') %}
-                        <!-- Display PDF directly -->
-                        <iframe src="/static/{{ project.file_path }}" style="width: 100px; height: 150px; border: none;"></iframe>
+                    {% if project.file_path.startswith('static/') %}
+                        <!-- Use the existing path without adding "static/" again -->
+                        <img src="/{{ project.file_path }}" alt="Document" style="max-width: 300px; height: auto; border-radius: 5px;">
                     {% else %}
-                        <!-- Unsupported file type -->
-                        Document preview not available
+                        <!-- Prepend "static/" if it's not already included -->
+                        <img src="/static/{{ project.file_path }}" alt="Document" style="max-width: 300px; height: auto; border-radius: 5px;">
                     {% endif %}
                 {% else %}
                     No Document
