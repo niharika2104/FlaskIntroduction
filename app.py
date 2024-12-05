@@ -78,8 +78,22 @@ def delete_assignment(id):
 # Project Routes
 @app.route('/projects/', methods=['GET'])
 def project_index():
-    projects = Project.query.order_by(Project.date_created).all()
+    # Get the selected sort filter
+    sort_by = request.args.get('sort_by', 'priority')  # Default to sorting by priority
+
+    # Sort projects based on the selected filter
+    if sort_by == 'priority':
+        projects = Project.query.order_by(Project.priority).all()
+    elif sort_by == 'due_date':
+        projects = Project.query.order_by(Project.due_date).all()
+    elif sort_by == 'category':
+        projects = Project.query.order_by(Project.category).all()
+    else:
+        projects = Project.query.order_by(Project.priority).all()  # Default sort
+
     return render_template('projects/index.html', projects=projects)
+    #projects = Project.query.order_by(Project.date_created).all()
+    #return render_template('projects/index.html', projects=projects)
 
 @app.route('/projects/new', methods=['GET', 'POST'])
 def new_project():

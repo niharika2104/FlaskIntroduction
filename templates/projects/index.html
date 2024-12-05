@@ -5,14 +5,25 @@
 {% block body %}
 <div class="projects-page">
     <h1>Projects</h1>
-    <a href="/projects/new">Add New Project</a>
+    <!-- Sort Filter -->
+    <form method="GET" action="/projects/" class="sort-form">
+        <label for="sort_by">Sort By:</label>
+        <select id="sort_by" name="sort_by">
+            <option value="priority" {% if request.args.get('sort_by') == 'priority' %}selected{% endif %}>Priority</option>
+            <option value="due_date" {% if request.args.get('sort_by') == 'due_date' %}selected{% endif %}>Due Date</option>
+            <option value="category" {% if request.args.get('sort_by') == 'category' %}selected{% endif %}>Category</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <a href="/projects/new" class="add-project-btn">Add New Project</a>
     <table>
         <thead>
             <tr>
-                <th>Content</th>
+                <th>Title</th>
                 <th>Category</th>
                 <th>Priority</th>
                 <th>Due Date</th>
+                <th>Document</th>
                 <th>Actions</th>
                 <th>View Project details</th>
             </tr>
@@ -25,40 +36,34 @@
                 <td>{{ project.priority }}</td>
                 <td>{{ project.due_date }}</td>
                 <td>
-                    <a href="/projects/edit/{{ project.id }}">Edit</a>
-                    <a href="/projects/delete/{{ project.id }}">Delete</a>
+                    {% if project.file_path %}
+                        {% if project.file_path.startswith('static/') %}
+                            <!-- Use the path as is if it already starts with "static/" -->
+                            <img src="/{{ project.file_path }}" alt="Document" style="width: 100px; height: auto; border-radius: 5px;">
+                        {% else %}
+                            <!-- Add "static/" only if it's not already present -->
+                            <img src="/static/{{ project.file_path }}" alt="Document" style="width: 100px; height: auto; border-radius: 5px;">
+                        {% endif %}
+                        {% else %}
+                            No Document
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/projects/edit/{{ project.id }}" class="edit-btn">Edit</a>
+                    <a href="/projects/delete/{{ project.id }}" class="delete-btn">Delete</a>
                 </td>
                 <td>
                     <!-- Button to view project details -->
-                    <a href="/projects/details/{{ project.id }}">View Details</a>
+                    <a href="/projects/details/{{ project.id }}" class="details-btn">View Details</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
-<!-- Modal for Document -->
-<div id="documentModal" class="modal"></div>
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal()">&times;</span>
-        <iframe id="documentFrame" src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+    <!-- Back to Homepage Link -->
+    <div class="back-link" style="text-align: center; margin-top: 20px;">
+        <a href="/" style="text-decoration: none; font-weight: bold;">Go Back to Homepage</a>
     </div>
 </div>
 
-<!-- JavaScript for Modal -->
-<script>
-    function openModal(documentUrl) {
-        // Set the iframe source to the document URL
-        document.getElementById('documentFrame').src = documentUrl;
-        // Display the modal
-        document.getElementById('documentModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        // Hide the modal
-        document.getElementById('documentModal').style.display = 'none';
-        // Clear the iframe source
-        document.getElementById('documentFrame').src = '';
-    }
-</script>
 {% endblock %}
