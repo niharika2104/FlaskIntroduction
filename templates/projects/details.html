@@ -30,7 +30,16 @@
             <th>Document</th>
             <td>
                 {% if project.file_path %}
-                    <a href="/static/{{ project.file_path }}" target="_blank">View Document</a>
+                    {% if project.file_path.endswith('.png') or project.file_path.endswith('.jpg') or project.file_path.endswith('.jpeg') or project.file_path.endswith('.gif') %}
+                        <!-- Display image directly -->
+                        <img src="/static/{{ project.file_path }}" alt="Document" style="width: 100px; height: auto; border-radius: 5px;">
+                    {% elif project.file_path.endswith('.pdf') %}
+                        <!-- Display PDF directly -->
+                        <iframe src="/static/{{ project.file_path }}" style="width: 100px; height: 150px; border: none;"></iframe>
+                    {% else %}
+                        <!-- Unsupported file type -->
+                        Document preview not available
+                    {% endif %}
                 {% else %}
                     No Document
                 {% endif %}
