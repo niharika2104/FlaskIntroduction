@@ -60,10 +60,43 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="charts-container">
+        <div id="category-chart" style="width: 600px; height: 400px;"></div>
+        <div id="priority-chart" style="width: 600px; height: 400px;"></div>
+    </div>
+
     <!-- Back to Homepage Link -->
     <div class="back-link" style="text-align: center; margin-top: 20px;">
         <a href="/" style="text-decoration: none; font-weight: bold;">Go Back to Homepage</a>
     </div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        fetch('/projects/chart_data')
+            .then(response => response.json())
+            .then(data => {
+                var layout = {title: 'Project Categories Distribution'};
+                var data = [{
+                    labels: data.labels,
+                    values: data.values,
+                    type: 'pie'
+                }];
+                Plotly.newPlot('category-chart', data, layout);
+            });
+    </script>
+    <script>
+        fetch('/projects/priority_chart')
+            .then(response => response.json())
+            .then(data => {
+                var layout = {title: 'Projects by Priority'};
+                var data = [{
+                    x: data.labels,
+                    y: data.values,
+                    type: 'bar'
+                }];
+                Plotly.newPlot('priority-chart', data, layout);
+            });
+    </script>
 </div>
 
 {% endblock %}

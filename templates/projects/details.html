@@ -5,44 +5,47 @@
 {% block body %}
 <div class="project-details">
     <h1>Project Details</h1>
-    <table>
-        <tr>
-            <th>Title</th>
-            <td>{{ project.title }}</td>
-        </tr>
-        <tr>
-            <th>Task</th>
-            <td>{{ project.task }}</td>
-        </tr>
-        <tr>
-            <th>Category</th>
-            <td>{{ project.category }}</td>
-        </tr>
-        <tr>
-            <th>Priority</th>
-            <td>{{ project.priority }}</td>
-        </tr>
-        <tr>
-            <th>Due Date</th>
-            <td>{{ project.due_date }}</td>
-        </tr>
-        <tr>
-            <th>Document</th>
-            <td>
-                {% if project.file_path %}
-                    {% if project.file_path.startswith('static/') %}
-                        <!-- Use the existing path without adding "static/" again -->
-                        <img src="/{{ project.file_path }}" alt="Document" style="max-width: 300px; height: auto; border-radius: 5px;">
+    <div class="details-container">
+        <table>
+            <tr>
+                <th>Title</th>
+                <td>{{ project.title }}</td>
+            </tr>
+            <tr>
+                <th>Task</th>
+                <td>{{ project.task }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ project.category }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ project.priority }}</td>
+            </tr>
+            <tr>
+                <th>Due Date</th>
+                <td>{{ project.due_date }}</td>
+            </tr>
+            <tr>
+                <th>Document</th>
+                <td>
+                    {% if project.file_path %}
+                        {% if project.file_path.startswith('static/') %}
+                            <!-- Use the existing path without adding "static/" again -->
+                            <img src="/{{ project.file_path }}" alt="Document" style="max-width: 300px; height: auto; border-radius: 5px;">
+                        {% else %}
+                            <!-- Prepend "static/" if it's not already included -->
+                            <img src="/static/{{ project.file_path }}" alt="Document" style="max-width: 300px; height: auto; border-radius: 5px;">
+                        {% endif %}
                     {% else %}
-                        <!-- Prepend "static/" if it's not already included -->
-                        <img src="/static/{{ project.file_path }}" alt="Document" style="max-width: 300px; height: auto; border-radius: 5px;">
+                        No Document
                     {% endif %}
-                {% else %}
-                    No Document
-                {% endif %}
-            </td>
-        </tr>
-    </table>
-    <a href="/projects/">Back to Projects</a>
+                </td>
+            </tr>
+        </table>    
+    </div>
+    <a href="/projects/" class="back-link">Back to Projects</a>
+    <a href="/" class="back-link">Back to Home Page</a>
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -155,6 +155,21 @@ def delete_project(id):
 def project_details(id):
     project = Project.query.get_or_404(id)  # Get the project or return 404 if not found
     return render_template('projects/details.html', project=project)
+
+@app.route('/projects/chart_data', methods=['GET'])
+def project_chart_data():
+    projects = Project.query.all()
+    categories = {}
+    for project in projects:
+        categories[project.category] = categories.get(project.category, 0) + 1
+    return jsonify({'labels': list(categories.keys()), 'values': list(categories.values())})
+
+@app.route('/projects/priority_chart', methods=['GET'])
+def priority_chart_data():
+    priorities = {}
+    for project in Project.query.all():
+        priorities[project.priority] = priorities.get(project.priority, 0) + 1
+    return jsonify({'labels': list(priorities.keys()), 'values': list(priorities.values())})
 
 if __name__ == "__main__":
     app.run(debug=True)
